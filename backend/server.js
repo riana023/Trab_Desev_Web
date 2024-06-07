@@ -22,14 +22,14 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
     console.error('Stack trace:', err.stack);
   });
 
-// Serve arquivos estáticos do diretório 'frontend'
+// Serve arquivos estáticos frontend
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Routes
+// Rotas
 app.use('/api/auth', authRoutes);
 app.use('/api/alunos', alunoRoutes);
 
-// Serve index.html para qualquer rota não especificada
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
 });
