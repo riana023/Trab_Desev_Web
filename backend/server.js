@@ -14,7 +14,7 @@ const MONGODB_URI = process.env.MONGO_URI;
 app.use(cors());
 app.use(express.json());
 
-// MongoDB conexão
+// Conexão Mongo Atlas
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB conectado'))
   .catch(err => {
@@ -22,17 +22,17 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
     console.error('Stack trace:', err.stack);
   });
 
-// Serve arquivos estáticos frontend
-app.use(express.static(path.join(__dirname, '../frontend')));
+// Arquivos estáticos frontend
+app.use(express.static(path.join(__dirname, 'frontend')));
+
+// Rota raiz - envia o arquivo index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
 
 // Rotas
 app.use('/api/auth', authRoutes);
 app.use('/api/alunos', alunoRoutes);
-
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
-});
 
 // Iniciar servidor
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
