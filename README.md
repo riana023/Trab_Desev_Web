@@ -11,4 +11,4 @@ O projeto "Gestão de Alunos" é um sistema para gerenciar informações de alun
 
 ## Para iniciar o servidor dentro do diretório backend,, execute o seguinte comando no terminal: 
 
-- npm start
+- node server.js
